@@ -20,7 +20,7 @@ const protectRoute = async (req, res, next) => {
       return res.status(401).json({ error: "Invalid user" });
     }
     req.user = user;
-    console.log(req.user);
+    // console.log(req.user);
     next();
   } catch (error) {
     console.log("Error from protectRoute Middleware", error);

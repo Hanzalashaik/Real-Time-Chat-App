@@ -1,0 +1,32 @@
+/* CustomScrollbar.css */
+/* Hide scrollbar for Firefox */
+* {
+    scrollbar-width: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge, and Chrome */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Custom scrollbar for Webkit */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #4caf50; /* Green */
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #45a049; /* Darker green */
+  }
+  

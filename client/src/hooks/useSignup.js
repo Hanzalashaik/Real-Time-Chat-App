@@ -5,7 +5,7 @@ import { useAuthContext } from "../context/AuthContext";
 
 export default function useSignup() {
   const [loading, setLoading] = useState(false);
-  const {setAuthUser} = useAuthContext();
+  const { setAuthUser } = useAuthContext();
 
   const signup = async ({
     fullName,
@@ -35,6 +35,15 @@ export default function useSignup() {
           password,
           confirmPassword,
           gender,
+        },
+        {
+          credentials: "include",
+          withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+          baseURL: "http://localhost:3000/",
         }
       );
 
@@ -43,7 +52,7 @@ export default function useSignup() {
 
       //set it to the local storage
       localStorage.setItem("user", JSON.stringify(response.data));
-      setAuthUser(response.data)
+      setAuthUser(response.data);
 
       if (response.error) {
         throw new Error(response.error);

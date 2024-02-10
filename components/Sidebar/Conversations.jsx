@@ -1,6 +1,6 @@
 import React from 'react'
 import Conversation from './Conversation'
-import useGetConversions from '../../hooks/useGetConversions';
+import useGetConversions from '../../client/src/hooks/useGetConversions';
 
 export default function Conversations() {
   const { loading, conversations } = useGetConversions();

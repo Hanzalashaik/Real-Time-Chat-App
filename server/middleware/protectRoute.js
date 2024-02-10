@@ -5,6 +5,7 @@ import User from "../models/User.js";
 const protectRoute = async (req, res, next) => {
   try {
     const token = req.cookies.jwt;
+    console.log(token);
     if (!token) {
       return res
         .status(401)
@@ -14,7 +15,6 @@ const protectRoute = async (req, res, next) => {
     if (!verify) {
       return res.status(401).json({ error: "Unauthorized - Invalid Token" });
     }
-
     const user = await User.findById(verify.userId).select("-password");
     if (!user) {
       return res.status(401).json({ error: "Invalid user" });

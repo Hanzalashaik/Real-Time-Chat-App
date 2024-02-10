@@ -10,15 +10,13 @@ function App() {
   return (
     <>
       <div className="p-4 flex justify-center items-center h-screen">
-
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={authuser ? <Home /> : <Navigate to={"/login"} />} />
+          <Route path="/login" element={authuser ? <Navigate to="/" /> : <Login />} />
           <Route path="/signup" element={authuser ? <Navigate to="/" /> : <Signup />} />
         </Routes>
         <Toaster />
       </div>
-
     </>
   )
 }

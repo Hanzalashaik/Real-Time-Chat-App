@@ -102,7 +102,10 @@ export default function Signup() {
 
             <Link to={"/login"} className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block'>Already have an accont?</Link>
             <div className='flex justify-center items-center '>
-              <button className='btn btn-sm mt-2 w-40 hover:bg-green-500 hover:text-black hover:duration-200'>Sign Up</button>
+              <button className='btn btn-sm mt-2 w-40 hover:bg-green-500 hover:text-black hover:duration-200 
+              ' disabled={loading}>
+                {loading ? <span className='loading loading-spinner'></span> : "Sign Up"}
+              </button>
             </div>
           </form>
         </div >

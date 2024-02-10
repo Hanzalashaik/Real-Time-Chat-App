@@ -6,12 +6,15 @@ const generateTokenAndSetCookie = (userId, res) => {
     expiresIn: "2d",
   });
 
-  res.cookie("jwt", token, {
-    maxAge: 2 * 24 * 60 * 60 * 1000,
-    httpOnly: true, //prevent XSS attacks cross-site Scripting attacks
-    sameSite: "Strict", //CSRF attacks cross-site request forgery attacks
-    // secure: config.get("NODE_ENV"),
-  });
+  // Set cookie options
+  const cookieOptions = {
+    maxAge: 2 * 24 * 60 * 60 * 1000, // 2 days in milliseconds
+    httpOnly: true, // Prevent XSS attacks
+    sameSite: "Strict", // Mitigate CSRF attacks
+  };
+
+  // Set cookie
+  res.cookie("jwt", token, cookieOptions);
 };
 
 export default generateTokenAndSetCookie;

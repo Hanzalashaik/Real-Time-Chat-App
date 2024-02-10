@@ -36,6 +36,7 @@ export const signup = async (req, res) => {
     if (newUser) {
       const createdUser = await userModel.create(newUser);
       const userId = createdUser._id;
+      
       generateTokenAndSetCookie(userId, res);
       // console.log(res);
 
@@ -91,7 +92,8 @@ export const login = async (req, res) => {
       profilePic: user.profilePic,
     });
   } catch (error) {
-    console.error("Error from login", error.message);
+    // console.error("Error from login", error.message);
+    console.log(error);
     res.status(500).json({ success: "Internal Server Error.." });
   }
 };

@@ -36,7 +36,7 @@ export const signup = async (req, res) => {
     if (newUser) {
       const createdUser = await userModel.create(newUser);
       const userId = createdUser._id;
-      
+
       generateTokenAndSetCookie(userId, res);
       // console.log(res);
 
@@ -53,7 +53,7 @@ export const signup = async (req, res) => {
   } catch (error) {
     console.error("Error from signup", error.message);
     console.log(error);
-    
+
     res.status(500).json({ success: "Internal Server Error.." });
   }
 };
@@ -82,7 +82,8 @@ export const login = async (req, res) => {
         .json({ success: "Invalid username and password!" });
     }
 
-    generateTokenAndSetCookie(user._id, res);
+    const token = generateTokenAndSetCookie(user._id, res);
+    // console.log("login token", token);
 
     res.status(200).json({
       success: "Login Successfully",
@@ -90,6 +91,7 @@ export const login = async (req, res) => {
       fullName: user.fullName,
       username: user.username,
       profilePic: user.profilePic,
+      token: token,
     });
   } catch (error) {
     // console.error("Error from login", error.message);
@@ -100,7 +102,6 @@ export const login = async (req, res) => {
 
 export const logout = (req, res) => {
   try {
-    res.cookie("jwt", "", { maxAge: 0 });
     res.status(200).json({
       success: "Logged out Successfully",
     });

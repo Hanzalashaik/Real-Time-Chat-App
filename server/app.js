@@ -10,15 +10,10 @@ import userRoutes from "./routes/userRoutes.js";
 
 const PORT = config.get("PORT");
 const app = express();
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  })
-);
 
-app.use(express.json()); //It parse the incoming requests to the JSON payload (from req.body).
-app.use(cookieParser());
+app.use(express.json()); // Body parser
+app.use(cookieParser()); // Cookie parser
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);

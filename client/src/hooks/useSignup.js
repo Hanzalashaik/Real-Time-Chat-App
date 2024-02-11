@@ -35,15 +35,6 @@ export default function useSignup() {
           password,
           confirmPassword,
           gender,
-        },
-        {
-          credentials: "include",
-          withCredentials: true,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-          baseURL: "http://localhost:3000/",
         }
       );
 

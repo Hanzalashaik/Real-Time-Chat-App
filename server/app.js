@@ -13,7 +13,13 @@ const app = express();
 
 app.use(express.json()); // Body parser
 app.use(cookieParser()); // Cookie parser
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+    exposedHeaders: ["set-cookie"], // This tells the browser to expose the Set-Cookie header to the client
+  })
+);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
@@ -21,4 +27,5 @@ app.use("/api/users", userRoutes);
 
 app.listen(PORT, (req, res) => {
   console.log(`Server is running at port ${PORT} 🚀`);
+
 });

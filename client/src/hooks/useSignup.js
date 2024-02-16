@@ -38,13 +38,14 @@ export default function useSignup() {
         }
       );
 
-      //console.log(response.data.success);
-      toast.success(response.data.success);
-
-      //set it to the local storage
       localStorage.setItem("user", JSON.stringify(response.data));
       setauthUser(response.data);
 
+      const jwtsignToken = response.data.token;
+      localStorage.setItem("token", jwtsignToken);
+
+
+      toast.success(response.data.success);
       if (response.error) {
         throw new Error(response.error);
       }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import useConversation from "../zustand/useConversation.js";
-import toast from "react-hot-toast";
 import axios from "axios";
+import useConversation from "../zustand/useConversation";
+import toast from "react-hot-toast";
 
 export default function useGetMessages() {
   const [loading, setLoading] = useState(false);
@@ -9,11 +9,14 @@ export default function useGetMessages() {
 
   useEffect(() => {
     const getMessages = async () => {
+      if (!selectedConversation?._id) {
+        return;
+      }
       setLoading(true);
       const token = localStorage.getItem("token");
       try {
         const response = await axios.get(
-          `http://192.168.0.99:5031/api/messages/${selectedConversation?._id}`,
+          `http://192.168.0.99:5031/api/messages/${selectedConversation._id}`,
           {
             headers: {
               "access-token": token,
@@ -24,13 +27,15 @@ export default function useGetMessages() {
         console.log(response.data);
         setMessages(response.data);
       } catch (error) {
-        console.log(error);
-        toast.error("Falied to get messages! Try after some time.");
+        console.error(error);
+        toast.error("Failed to get messages! Try after some time.");
       } finally {
         setLoading(false);
       }
     };
-    if (selectedConversation?._id) getMessages();
+
+    getMessages();
   }, [selectedConversation?._id, setMessages]);
-  return { loading, messages };
+
+  return { messages, loading };
 }

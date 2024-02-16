@@ -7,16 +7,12 @@ const generateTokenAndSetCookie = (userId, res) => {
   const token = jwt.sign({ userId: userId }, config.get("JWT_TOKEN"), {
     expiresIn: "1d", // Token expires in 1 day
   });
-
-  // Set token in a cookie
-  res.cookie("jwt", token, {
-    maxAge: 90 * 24 * 60 * 60 * 1000,
-    httpOnly: true,
-    sameSite: "none",
-    secure: true,
-  });
-
-  console.log(`Token generated and cookie set for user ID: ${userId}`);
+  if (!token) {
+    return res
+        .status(500)
+        .json({ success: false, msg: "Token generation error" });
+  }
+  // console.log(`Token generated and cookie set for user ID: ${userId}`);
   return token;
 };
 

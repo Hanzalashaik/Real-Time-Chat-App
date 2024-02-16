@@ -9,12 +9,16 @@ export default function useGetConversions() {
   useEffect(() => {
     const getconversion = async () => {
       setLoading(true);
-
+      const token = localStorage.getItem("token");
       try {
-        const response = await axios.get("http://192.168.0.99:5031/api/users");
+        const response = await axios.get("http://192.168.0.99:5031/api/users", {
+          headers: {
+            "access-token": token,
+          },
+        });
 
-        console.log("users", response);
-        setConversation(response);
+        // console.log("users", response);
+        setConversation(response.data);
       } catch (error) {
         console.log(error);
         toast.error(error.response.data.success);

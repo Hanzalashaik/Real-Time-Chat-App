@@ -5,7 +5,7 @@ import { useAuthContext } from "../context/AuthContext";
 
 export default function useSignup() {
   const [loading, setLoading] = useState(false);
-  const { setAuthUser } = useAuthContext();
+  const { setauthUser } = useAuthContext();
 
   const signup = async ({
     fullName,
@@ -43,7 +43,7 @@ export default function useSignup() {
 
       //set it to the local storage
       localStorage.setItem("user", JSON.stringify(response.data));
-      setAuthUser(response.data);
+      setauthUser(response.data);
 
       if (response.error) {
         throw new Error(response.error);

@@ -37,7 +37,7 @@ export const signup = async (req, res) => {
       const createdUser = await userModel.create(newUser);
       const userId = createdUser._id;
 
-      generateTokenAndSetCookie(userId, res);
+      const token = generateTokenAndSetCookie(userId, res);
       // console.log(res);
 
       res.status(201).json({
@@ -46,6 +46,7 @@ export const signup = async (req, res) => {
         fullName: newUser.fullName,
         username: newUser.username,
         profilePic: newUser.profilePic,
+        token: token,
       });
     } else {
       return res.status(400).json({ sucess: "Invalid User Data" });
@@ -83,19 +84,16 @@ export const login = async (req, res) => {
     }
 
     const token = generateTokenAndSetCookie(user._id, res);
-    console.log("login token", token);
+    // console.log("login token", token);
 
-    res
-      .status(200)
-      .json({
-        success: "Login Successfully",
-        _id: user._id,
-        fullName: user.fullName,
-        username: user.username,
-        profilePic: user.profilePic,
-        token: token,
-      })
-
+    res.status(200).json({
+      success: "Login Successfully",
+      _id: user._id,
+      fullName: user.fullName,
+      username: user.username,
+      profilePic: user.profilePic,
+      token: token,
+    });
   } catch (error) {
     // console.error("Error from login", error.message);
     console.log(error);

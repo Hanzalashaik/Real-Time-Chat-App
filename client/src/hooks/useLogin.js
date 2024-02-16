@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { setCookie } from "../../utils/utility.js";
 import { useAuthContext } from "../context/AuthContext.jsx";
-// import { useCookies } from "react-cookie";
 
 export default function useLogin() {
   const [loading, setLoading] = useState(false);
-  const { setAuthUser } = useAuthContext();
+  const { setauthUser } = useAuthContext();
 
   //Login Fucntion
   const login = async (username, password) => {
@@ -26,16 +24,18 @@ export default function useLogin() {
           password,
         }
       );
-      console.log(response.data);
+      // console.log(response.data);
       localStorage.setItem("user", JSON.stringify(response.data));
-      setAuthUser(response.data);
-      toast.success(response.data.success);
+      setauthUser(response.data);
 
-      // Using utility function to set the cookie
-      setCookie("jwt", response.data.token, 7); // Sets a cookie for 7 days
+      const jwtsignToken = response.data.token;
+      localStorage.setItem("token", jwtsignToken);
+
+      // console.log("Login", response);
+      toast.success(response.data.success);
     } catch (error) {
-      console.error(error);
-      toast.error("Login failed");
+      console.error(error.response.data.success);
+      toast.error(error.response.data.success);
     } finally {
       setLoading(false);
     }
@@ -54,7 +54,7 @@ export default function useLogin() {
   //         password,
   //       });
   //       console.log(response.data);
-  //       setAuthUser(response.data);
+  //       setauthUser(response.data);
   //       toast.success("Login successful");
 
   //       // Set cookie directly without a package

@@ -7,9 +7,9 @@ import cors from "cors";
 import authRoutes from "./routes/auth.routes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import { app, server } from "./socket/socket.js";
 
 const PORT = config.get("PORT");
-const app = express();
 
 app.use(express.json()); // Body parser
 app.use(cookieParser()); // Cookie parser
@@ -25,7 +25,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 
-app.listen(PORT, (req, res) => {
+server.listen(PORT, (req, res) => {
   console.log(`Server is running at port ${PORT} 🚀`);
-
 });

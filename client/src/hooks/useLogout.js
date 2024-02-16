@@ -1,13 +1,11 @@
 import axios from "axios";
-import React, { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
-import { useCookies } from "react-cookie";
-import { eraseCookie } from "../../utils/utility.js";
+import { useState } from "react";
 
 export default function useLogout() {
   const [loading, setLoading] = useState(false);
-  const { setAuthUser } = useAuthContext();
+  const { setauthUser } = useAuthContext();
 
   const logout = async () => {
     setLoading(true);
@@ -18,9 +16,8 @@ export default function useLogout() {
 
       console.log(response);
       toast.success(response.data.success);
-      eraseCookie("jwt");
       localStorage.clear();
-      setAuthUser(null);
+      setauthUser(null);
     } catch (error) {
       toast.error(error.response.data.success);
     } finally {

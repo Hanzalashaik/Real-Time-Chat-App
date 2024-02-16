@@ -1,25 +1,33 @@
 import React from 'react';
-import avatar from "../../assets/avatar1.svg";
-import "../css/CustomScrollbar.css"; // Import custom CSS for scrollbar styling
+import "../css/CustomScrollbar.css";
+import useConversation from "../../zustand/useConversation.js"
+import { useSocketContext } from '../../context/SocketContext.jsx';
 
-export default function Conversation() {
+export default function Conversation({ conversation, emoji, lastIndex }) {
+    const { selectedConversation, setSelectedConversation } = useConversation()
+    const isSelected = selectedConversation?._id === conversation._id;
+    const { onlineUsers } = useSocketContext();
+    const isOnline = onlineUsers.includes(conversation._id)
     return (
         <>
-            <div className='flex gap-2 items-center hover:bg-green-600 rounded p-2 py-1 cursor-pointer scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-green-600 scrollbar-track-green-300'>
-                <div className='avatar online'>
+            <div className={`flex gap-2 items-center hover:bg-green-600 rounded p-2 py-1 cursor-pointer scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-green-600 scrollbar-track-green-300 ${isSelected ? "bg-green-700" : ""}`}
+                onClick={() => setSelectedConversation(conversation)}
+
+            >
+                <div className={`avatar ${isOnline ? "online" : ""}`}>
                     <div className='w-12 rounded-full'>
-                        <img src={avatar} alt="image" />
+                        <img src={conversation.profilePic} alt="image" />
                     </div>
                 </div>
 
                 <div className='flex flex-col flex-1'>
                     <div className='flex gap-3 justify-between'>
-                        <p className='font-bold text-gray-200'>Hanzala</p>
-                        <span className='text-xl'>🚀</span>
+                        <p className='font-bold text-gray-200'>{conversation.fullName}</p>
+                        <span className='text-xl'>{emoji}</span>
                     </div>
                 </div>
             </div>
-            <div className='divider my-0 py-0 h-1' />
+            {!lastIndex && <div className='divider my-0 py-0 h-1' />}
         </>
     );
 }

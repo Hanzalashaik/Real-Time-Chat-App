@@ -21,8 +21,7 @@ export default function useSendMessage() {
           },
         }
       );
-      const msg = response.data.newMessage.message;
-      // console.log(msg);
+      const msg = response.data.newMessage;
       setMessages([...messages, msg]);
     } catch (error) {
       console.log(error.response);

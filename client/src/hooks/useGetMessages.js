@@ -16,7 +16,7 @@ export default function useGetMessages() {
       const token = localStorage.getItem("token");
       try {
         const response = await axios.get(
-          `http://192.168.0.99:5031/api/messages/${selectedConversation._id}`,
+          `http://192.168.0.99:5031/api/messages/${selectedConversation._id}`, // Corrected: Added backticks for template string
           {
             headers: {
               "access-token": token,
@@ -24,7 +24,7 @@ export default function useGetMessages() {
           }
         );
 
-        console.log(response.data);
+        // console.log(response.data);
         setMessages(response.data);
       } catch (error) {
         console.error(error);

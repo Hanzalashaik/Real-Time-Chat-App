@@ -14,7 +14,7 @@ export default function useLogout() {
         "http://192.168.0.99:5031/api/auth/logout"
       );
 
-      console.log(response);
+      // console.log(response);
       toast.success(response.data.success);
       localStorage.clear();
       setauthUser(null);

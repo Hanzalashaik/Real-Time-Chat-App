@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useAuthContext } from "../context/AuthContext.jsx";
+import config from "../../config.json"
+
 
 export default function useLogin() {
   const [loading, setLoading] = useState(false);
@@ -17,8 +19,9 @@ export default function useLogin() {
     if (!success) return;
     setLoading(true);
     try {
+      const URL = config.URL
       const response = await axios.post(
-        "http://192.168.0.99:5031/api/auth/login",
+        `${URL}/api/auth/login`,
         {
           username,
           password,
@@ -40,34 +43,6 @@ export default function useLogin() {
       setLoading(false);
     }
   };
-  //   const login = async (username, password) => {
-  //     const success = handleInputErrors({
-  //       username,
-  //       password,
-  //     });
-
-  //     if (!success) return;
-  //     setLoading(true);
-  //     try {
-  //       const response = await axios.post('http://192.168.0.99:5031/api/auth/login', {
-  //         username,
-  //         password,
-  //       });
-  //       console.log(response.data);
-  //       setauthUser(response.data);
-  //       toast.success("Login successful");
-
-  //       // Set cookie directly without a package
-  //       document.cookie = `jwt=${response.data.token}; path=/; Secure; SameSite=Strict`;
-
-  //       // Optional: Adjust cookie attributes such as expiration, domain, etc. as needed
-  //     } catch (error) {
-  //       console.error(error);
-  //       toast.error("Login failed");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
   return { loading, login };
 }
 

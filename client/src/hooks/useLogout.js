@@ -2,6 +2,7 @@ import axios from "axios";
 import { useAuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import config from "../../config.json"
 
 export default function useLogout() {
   const [loading, setLoading] = useState(false);
@@ -9,9 +10,10 @@ export default function useLogout() {
 
   const logout = async () => {
     setLoading(true);
+    const URL = config.URL
     try {
       const response = await axios.post(
-        "http://192.168.0.99:5031/api/auth/logout"
+        `${URL}/api/auth/logout`
       );
 
       // console.log(response);

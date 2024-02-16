@@ -1,6 +1,7 @@
 {
-    "PORT": 5031,
+    "PORT": 5011,
     "DB_URI": "mongodb+srv://shaikhhanzala27:sudo@cluster0.tgf9rmm.mongodb.net/ChatApp",
     "JWT_TOKEN": "SHAIKH",
-    "NODE_ENV": "developement"
+    "NODE_ENV": "developement",
+    "URL":"https://chatapp.hanzala.site"
 }

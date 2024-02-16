@@ -10,13 +10,14 @@ import userRoutes from "./routes/userRoutes.js";
 import { app, server } from "./socket/socket.js";
 
 const PORT = config.get("PORT");
+const URL = config.get("URL");
 
 app.use(express.json()); // Body parser
 app.use(cookieParser()); // Cookie parser
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3000",
+    origin: `${URL}`,
     exposedHeaders: ["set-cookie"], // This tells the browser to expose the Set-Cookie header to the client
   })
 );

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useConversation from "../zustand/useConversation";
 import toast from "react-hot-toast";
+import config from "../../config.json"
 
 export default function useGetMessages() {
   const [loading, setLoading] = useState(false);
@@ -15,8 +16,9 @@ export default function useGetMessages() {
       setLoading(true);
       const token = localStorage.getItem("token");
       try {
+        const URL = config.URL
         const response = await axios.get(
-          `http://192.168.0.99:5031/api/messages/${selectedConversation._id}`, // Corrected: Added backticks for template string
+          `${URL}/api/messages/${selectedConversation._id}`, // Corrected: Added backticks for template string
           {
             headers: {
               "access-token": token,

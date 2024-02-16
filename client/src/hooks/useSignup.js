@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useAuthContext } from "../context/AuthContext";
+import config from "../../config.json"
 
 export default function useSignup() {
   const [loading, setLoading] = useState(false);
@@ -27,8 +28,9 @@ export default function useSignup() {
     setLoading(true);
 
     try {
+      const URL = config.URL
       const response = await axios.post(
-        `http://192.168.0.99:5031/api/auth/signup`,
+        `${URL}/api/auth/signup`,
         {
           fullName,
           username,
@@ -43,7 +45,6 @@ export default function useSignup() {
 
       const jwtsignToken = response.data.token;
       localStorage.setItem("token", jwtsignToken);
-
 
       toast.success(response.data.success);
       if (response.error) {

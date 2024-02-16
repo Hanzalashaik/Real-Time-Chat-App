@@ -2,6 +2,7 @@ import { useState } from "react";
 import useConversation from "../zustand/useConversation.js";
 import axios from "axios";
 import toast from "react-hot-toast";
+import config from "../../config.json"
 
 export default function useSendMessage() {
   const [loading, setLoading] = useState(false);
@@ -12,8 +13,9 @@ export default function useSendMessage() {
     setLoading(true);
     // console.log("Message from send message", message);
     try {
+      const URL = config.URL
       const response = await axios.post(
-        `http://192.168.0.99:5031/api/messages/send/${selectedConversation._id}`,
+        `${URL}/api/messages/send/${selectedConversation._id}`,
         { message },
         {
           headers: {

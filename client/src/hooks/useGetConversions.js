@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import config from "../../config.json"
 
 export default function useGetConversions() {
   const [loading, setLoading] = useState(false);
@@ -11,11 +12,15 @@ export default function useGetConversions() {
       setLoading(true);
       const token = localStorage.getItem("token");
       try {
-        const response = await axios.get("http://192.168.0.99:5031/api/users", {
-          headers: {
-            "access-token": token,
-          },
-        });
+        const URL = config.URL
+        const response = await axios.get(
+          `${URL}/api/users`,
+          {
+            headers: {
+              "access-token": token,
+            },
+          }
+        );
 
         // console.log("users", response);
         setConversation(response.data);

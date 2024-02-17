@@ -23,7 +23,15 @@ This Real-Time Chat Web Application offers a seamless platform for users to enga
 
 1.  Login Page
 
-![Image]( "Image")
+![Image](https://github.com/Hanzalashaik/Real-Time-Chat-App/blob/main/client/public/login%20page.png "Image")
+
+2. Signup Page
+
+![Image](https://github.com/Hanzalashaik/Real-Time-Chat-App/blob/main/client/public/signup%20page.png "Image")
+
+3. Home Page
+
+![Image](https://github.com/Hanzalashaik/Real-Time-Chat-App/blob/main/client/public/Homepage.png "Image")
 
 ## Installation
 

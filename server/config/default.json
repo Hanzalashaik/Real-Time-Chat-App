@@ -1,7 +1,0 @@
-{
-    "PORT": 5011,
-    "DB_URI": "YOUR_URI",
-    "JWT_TOKEN": "RANDOM_KEY",
-    "NODE_ENV": "developement",
-    "URL":"FRONTEND_URL"
-}

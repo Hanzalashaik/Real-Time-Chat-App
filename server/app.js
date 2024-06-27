@@ -27,12 +27,25 @@ app.use(
   })
 );
 
+app.use(express.static(path.join(__dirname, "build")));
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build"));
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+// Handle 404 errors - Route not found
+app.use((req, res, next) => {
+  res.status(404).send("404 - Not Found");
+});
+
+// Handle other errors
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("500 - Internal Server Error");
 });
 
 server.listen(PORT, (req, res) => {

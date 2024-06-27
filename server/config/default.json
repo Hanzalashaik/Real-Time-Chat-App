@@ -1,0 +1,7 @@
+{
+    "PORT": 5011,
+    "DB_URI": "mongodb+srv://shaikhhanzala27:sudo@cluster0.tgf9rmm.mongodb.net/ChatApp",
+    "JWT_TOKEN": "RANDOM_KEY",
+    "NODE_ENV": "developement",
+    "URL":"http://localhost:3000"
+}
